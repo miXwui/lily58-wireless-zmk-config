@@ -180,20 +180,20 @@ Setup for future touch/trackpad?
 
             /*
                 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                |         |                     |                     |             |                 |            |                |   <   |    >    |    [   |    ]    |     {    |    }   |
-                |   MUTE  |        VOL_DN       |        VOL_UP       |     PREV    |    PLAY/PAUSE   |    NEXT    |                |       |    1    |    2   |    3    |   PSCRN  |        |
-                |         |        BRI_DN       |        BRI_UP       |             |       ESC       |            |                |       |    4    |    5   |    6    |     \    |    |   |
-                |         |                     |                     |     UNDO    |       REDO      |            |       | |      |       |    7    |    8   |    9    |     0    |        |
+                |         |                     |                     |             |                 |            |                |   [   |    7    |    8   |    9    |     0    |    -   |
+                |   MUTE  |        VOL_DN       |        VOL_UP       |     PREV    |    PLAY/PAUSE   |    NEXT    |                |   ]   |    4    |    5   |    6    |   PSCRN  |        |
+                |         |        BRI_DN       |        BRI_UP       |             |       ESC       |            |                |   {   |    1    |    2   |    3    |     |    |        |
+                |         |                     |                     |     UNDO    |       REDO      |            |       | |      |   {   |    0    |    <   |    >    |     \    |        |
                                                                       |             |                 |            |       | |      |  L4   |         |        |
             */
 
             display-name = "Lower";
             bindings = <
-                &trans      &trans                &trans                &trans        &trans            &trans                        &kp LT  &kp GT  &kp LBKT  &kp RBKT  &kp LBRC   &kp RBRC
-                &kp K_MUTE  &kp K_VOLUME_DOWN     &kp K_VOLUME_UP       &kp K_PREV    &kp K_PLAY_PAUSE  &kp K_NEXT                    &trans  &kp N1  &kp N2    &kp N3    &kp PSCRN  &trans
-                &trans      &kp C_BRIGHTNESS_DEC  &kp C_BRIGHTNESS_INC  &trans        &kp ESC           &trans                        &trans  &kp N4  &kp N5    &kp N6    &kp BSLH   &kp PIPE
-                &trans      &trans                &trans                &kp LC(Z)     &kp LC(LS(Z))     &trans      &trans    &trans  &trans  &kp N7  &kp N8    &kp N9    &kp N0     &trans
-                                                                        &trans        &trans            &trans      &trans    &trans  &mo 4   &trans   &trans
+                &trans      &trans                &trans                &trans        &trans            &trans                        &kp LBKT  &kp N7  &kp N8  &kp N9  &kp N0     &kp MINUS
+                &kp K_MUTE  &kp K_VOLUME_DOWN     &kp K_VOLUME_UP       &kp K_PREV    &kp K_PLAY_PAUSE  &kp K_NEXT                    &kp RBKT  &kp N4  &kp N5  &kp N6  &kp PSCRN  &trans
+                &trans      &kp C_BRIGHTNESS_DEC  &kp C_BRIGHTNESS_INC  &trans        &kp ESC           &trans                        &kp LBRC  &kp N1  &kp N2  &kp N3  &kp PIPE   &trans
+                &trans      &trans                &trans                &kp LC(Z)     &kp LC(LS(Z))     &trans      &trans    &trans  &kp RBRC  &kp N0  &kp LT  &kp GT  &kp BSLH   &trans
+                                                                        &trans        &trans            &trans      &trans    &trans  &mo 4     &trans  &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
@@ -211,7 +211,7 @@ Setup for future touch/trackpad?
                 M_LT   |   M_DN  |    M_UP  |    M_RT  |
 
                 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-                |  F11  |   F1   |      F2      |     F3     |     F4     |   F5   |                 |      F6      |   F7     |    F8   |    F9    |    F10   |    =    |
+                |  F11  |   F1   |      F2      |     F3     |     F4     |   F5   |                 |      F6      |   F7     |    F8   |    F9    |    F10   |         |
                 |  F12  |        |    LS+TAB    |            |            |        |                 |     P_UP     |   HOME   |    ^    |    END   |          |         |
                 |       |        |   LS+LC+TAB  |    TAB     |   LC+TAB   |        |                 |    P_DOWN    |    <-    |    v    |    ->    |          |         |
                 |       |        |              |            |            |        |       |  |      |              |   M_LT   |   M_DN  |    M_UP  |    M_RT  |         |
@@ -220,7 +220,7 @@ Setup for future touch/trackpad?
 
             display-name = "Raise";
             bindings = <
-                &kp F11  &kp F1  &kp F2           &kp F3       &kp F4       &kp F5                     &kp F6         &kp F7     &kp F8     &kp F9     &kp F10   &kp EQUAL
+                &kp F11  &kp F1  &kp F2           &kp F3       &kp F4       &kp F5                     &kp F6         &kp F7     &kp F8     &kp F9     &kp F10   &trans
                 &kp F12  &trans  &trans           &kp LS(TAB)  &trans       &trans                     &kp PAGE_UP    &kp HOME   &kp UP     &kp END    &trans    &trans
                 &trans   &trans  &kp LC(LS(TAB))  &kp TAB      &kp LC(TAB)  &trans                     &kp PAGE_DOWN  &kp LEFT   &kp DOWN   &kp RIGHT  &trans    &trans
                 &trans   &trans  &trans           &trans       &trans       &trans   &trans    &trans  &trans         &trans     &trans     &trans     &trans    &trans

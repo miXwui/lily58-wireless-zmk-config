@@ -10,6 +10,12 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/ext_power.h>
+/*
+https://zmk.dev/docs/behaviors/mouse-emulation
+
+Setup for future touch/trackpad?
+*/
+#include <dt-bindings/zmk/mouse.h>
 
 / {
     macros {
@@ -150,21 +156,21 @@
         default_layer {
 
         /*
-                -----------------------------------------------------------------------------------------------------------------------------------
-                |    `    |   1   |  2   |    3    |    4    |   5   |                    |   6   |   7   |    8     |    9   |   0    |     -    |
-                |   TAB   |   Q   |  W   |    E    |    R    |   T   |                    |   Y   |   U   |    I     |    O   |   P    |     \    |
-                |   CTRL  |   A   |  S   |    D    |    F    |   G   |                    |   H   |   J   |    K     |    L   |   ;    |     '    |
-                |  SHIFT  |   Z   |  X   |    C    |    V    |   B   |    [    | |   ]    |   N   |   M   |    ,     |    .   |   /    |   SHIFT  |
-                                         |   ALT   |   MOD   | LOWER |  SPACE  | | ENTER  | RAISE |  COMP | BSPC_DEL |
+                ------------------------------------------------------------------------------------------------------------------------------------
+                |    `    |   1   |  2   |    3    |    4    |   5   |                    |    6   |   7   |    8     |    9   |   0    |     -    |
+                |   TAB   |   Q   |  W   |    E    |    R    |   T   |                    |    Y   |   U   |    I     |    O   |   P    |     =    |
+                |   CTRL  |   A   |  S   |    D    |    F    |   G   |                    |    H   |   J   |    K     |    L   |   ;    |     '    |
+                |  SHIFT  |   Z   |  X   |    C    |    V    |   B   |   ESC   | |  M_LC  |    N   |   M   |    ,     |    .   |   /    |   SHIFT  |
+                                         |   ALT   |   MOD   | LOWER |  SPACE  | | ENTER  |  RAISE |  COMP | BSPC_DEL |
         */
 
             display-name = "Base";
             bindings = <
-                &kp GRAVE  &kp N1  &kp N2  &kp N3    &kp N4    &kp N5                       &kp N6  &kp N7  &kp N8     &kp N9   &kp N0    &kp MINUS
-                &kp TAB    &kp Q   &kp W   &kp E     &kp R     &kp T                        &kp Y   &kp U   &kp I      &kp O    &kp P     &kp BSLH
-                &kp LCTRL  &kp A   &kp S   &kp D     &kp F     &kp G                        &kp H   &kp J   &kp K      &kp L    &kp SEMI  &kp SQT
-                &kp LSHFT  &kp Z   &kp X   &kp C     &kp V     &kp B   &kp LBKT   &kp RBKT  &kp N   &kp M   &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
-                                           &kp LALT  &kp LGUI  &mo 1   &kp SPACE  &kp RET   &mo 2   &mo 3   &bspc_del
+                &kp GRAVE  &kp N1  &kp N2  &kp N3    &kp N4    &kp N5                        &kp N6  &kp N7  &kp N8     &kp N9   &kp N0    &kp MINUS
+                &kp TAB    &kp Q   &kp W   &kp E     &kp R     &kp T                         &kp Y   &kp U   &kp I      &kp O    &kp P     &kp EQUAL
+                &kp LCTRL  &kp A   &kp S   &kp D     &kp F     &kp G                         &kp H   &kp J   &kp K      &kp L    &kp SEMI  &kp SQT
+                &kp LSHFT  &kp Z   &kp X   &kp C     &kp V     &kp B   &kp ESC    &mkp LCLK  &kp N   &kp M   &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
+                                           &kp LALT  &kp LGUI  &mo 1   &kp SPACE  &kp RET    &mo 2   &mo 3   &bspc_del
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
@@ -173,21 +179,21 @@
         lower_layer {
 
             /*
-                --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                |         |                     |                     |             |                 |            |                |       |       |       |       |         |     =    |
-                |   MUTE  |        VOL_DN       |        VOL_UP       |     PREV    |    PLAY/PAUSE   |    NEXT    |                |       |       |       |       |  PSCRN  |          |
-                |         |        BRI_DN       |        BRI_UP       |             |       ESC       |            |                |       |       |       |       |         |          |
-                |         |                     |                     |     UNDO    |       REDO      |            |       | |      |       |       |       |       |         |          |
-                                                                      |             |                 |            |       | |      |  L4   |       |       |
+                ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                |         |                     |                     |             |                 |            |                |   <   |    >    |    [   |    ]    |     {    |    }   |
+                |   MUTE  |        VOL_DN       |        VOL_UP       |     PREV    |    PLAY/PAUSE   |    NEXT    |                |       |    1    |    2   |    3    |   PSCRN  |        |
+                |         |        BRI_DN       |        BRI_UP       |             |       ESC       |            |                |       |    4    |    5   |    6    |     \    |    |   |
+                |         |                     |                     |     UNDO    |       REDO      |            |       | |      |       |    7    |    8   |    9    |     0    |        |
+                                                                      |             |                 |            |       | |      |  L4   |         |        |
             */
 
             display-name = "Lower";
             bindings = <
-                &trans      &trans                &trans                &trans        &trans            &trans                        &trans  &trans  &trans  &trans  &trans     &kp EQUAL
-                &kp K_MUTE  &kp K_VOLUME_DOWN     &kp K_VOLUME_UP       &kp K_PREV    &kp K_PLAY_PAUSE  &kp K_NEXT                    &trans  &trans  &trans  &trans  &kp PSCRN  &trans
-                &trans      &kp C_BRIGHTNESS_DEC  &kp C_BRIGHTNESS_INC  &trans        &kp ESC           &trans                        &trans  &trans  &trans  &trans  &trans     &trans
-                &trans      &trans                &trans                &kp LC(Z)     &kp LC(LS(Z))     &trans      &trans    &trans  &trans  &trans  &trans  &trans  &trans     &trans
-                                                                        &trans        &trans            &trans      &trans    &trans  &mo 4   &trans  &trans 
+                &trans      &trans                &trans                &trans        &trans            &trans                        &kp LT  &kp GT  &kp LBKT  &kp RBKT  &kp LBRC   &kp RBRC
+                &kp K_MUTE  &kp K_VOLUME_DOWN     &kp K_VOLUME_UP       &kp K_PREV    &kp K_PLAY_PAUSE  &kp K_NEXT                    &trans  &kp N1  &kp N2    &kp N3    &kp PSCRN  &trans
+                &trans      &kp C_BRIGHTNESS_DEC  &kp C_BRIGHTNESS_INC  &trans        &kp ESC           &trans                        &trans  &kp N4  &kp N5    &kp N6    &kp BSLH   &kp PIPE
+                &trans      &trans                &trans                &kp LC(Z)     &kp LC(LS(Z))     &trans      &trans    &trans  &trans  &kp N7  &kp N8    &kp N9    &kp N0     &trans
+                                                                        &trans        &trans            &trans      &trans    &trans  &mo 4   &trans   &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
@@ -199,12 +205,17 @@
                 Holding LCtrl with LC(LS(TAB)) and LC(TAB) in VSCode keeps the tab switcher open.
                 Reminder that we can also hold LCtrl with PAGE_UP and PAGE_DOWN to switch tabs.
 
+                When mouse emulation scrolling is added:
+                https://github.com/zmkfirmware/zmk/pull/2027
+                We can add the triggers for these:
+                M_LT   |   M_DN  |    M_UP  |    M_RT  |
+
                 ----------------------------------------------------------------------------------------------------------------------------------------------------------
                 |  F11  |   F1   |      F2      |     F3     |     F4     |   F5   |                 |      F6      |   F7     |    F8   |    F9    |    F10   |    =    |
                 |  F12  |        |    LS+TAB    |            |            |        |                 |     P_UP     |   HOME   |    ^    |    END   |          |         |
                 |       |        |   LS+LC+TAB  |    TAB     |   LC+TAB   |        |                 |    P_DOWN    |    <-    |    v    |    ->    |          |         |
-                |       |        |              |            |            |        |       |  |      |              |          |         |          |          |         |
-                                                             |            |        |   L4  |  |      |              |          |         |          |
+                |       |        |              |            |            |        |       |  |      |              |   M_LT   |   M_DN  |    M_UP  |    M_RT  |         |
+                                                             |            |        |   L4  |  |      |              |          |         |    DEL   |
             */
 
             display-name = "Raise";
@@ -213,7 +224,7 @@
                 &kp F12  &trans  &trans           &kp LS(TAB)  &trans       &trans                     &kp PAGE_UP    &kp HOME   &kp UP     &kp END    &trans    &trans
                 &trans   &trans  &kp LC(LS(TAB))  &kp TAB      &kp LC(TAB)  &trans                     &kp PAGE_DOWN  &kp LEFT   &kp DOWN   &kp RIGHT  &trans    &trans
                 &trans   &trans  &trans           &trans       &trans       &trans   &trans    &trans  &trans         &trans     &trans     &trans     &trans    &trans
-                                                  &trans       &trans       &mo 4    &trans    &trans  &trans         &trans     &trans
+                                                  &trans       &trans       &mo 4    &trans    &trans  &trans         &trans     &kp DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;

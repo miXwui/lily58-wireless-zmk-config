@@ -208,7 +208,7 @@ https://zmk.dev/docs/behaviors/mouse-emulation
                 |  F12  |        |    LS+TAB    |            |            |        |                    |     P_UP     |   HOME   |    ^      |    END   |         |      |
                 |       |        |   LS+LC+TAB  |    TAB     |   LC+TAB   |        |                    |    P_DOWN    |    <-    |    v      |    ->    |         |      |
                 |       |        |              |            |            |        |        |  |        |              |          |           |          |         |      |
-                                                             |            |        |   L4   |  |        |              |          |           |    DEL   |
+                                                             |            |   L4   |        |  |        |              |          |           |    DEL   |
             */
 
             display-name = "Raise";

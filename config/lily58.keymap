@@ -161,118 +161,140 @@ https://zmk.dev/docs/behaviors/mouse-emulation
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        layer_base {
 
         /*
-                ------------------------------------------------------------------------------------------------------------------------------------
-                |    `    |   1   |  2   |    3    |    4    |   5   |                    |    6   |   7   |    8     |    9   |   0    |     -    |
-                |   TAB   |   Q   |  W   |    E    |    R    |   T   |                    |    Y   |   U   |    I     |    O   |   P    |     =    |
-                |   CTRL  |   A   |  S   |    D    |    F    |   G   |                    |    H   |   J   |    K     |    L   |   ;    |     '    |
-                |  SHIFT  |   Z   |  X   |    C    |    V    |   B   |   TODO  | | ENTER  |    N   |   M   |    ,     |    .   |   /    |   SHIFT  |
-                                         |   ALT   |   TODO  | LOWER |  SPACE  | |  TD0   |   MOD  |  COMP | BSPC_DEL |
+                ---------------------------------------------------------------------------------------------------------------------------------------
+                |    `    |   1   |  2   |    3    |    4    |   5   |                    |    6     |   7    |    8     |    9   |   0    |     =    |
+                |   TAB   |   Q   |  W   |    E    |    R    |   T   |                    |    Y     |   U    |    I     |    O   |   P    |     -    |
+                |   CTRL  |   A   |  S   |    D    |    F    |   G   |                    |    H     |   J    |    K     |    L   |   ;    |     '    |
+                |  SHIFT  |   Z   |  X   |    C    |    V    |   B   |   ESC   | | ENTER  |    N     |   M    |    ,     |    .   |   /    |   SHIFT  |
+                                         |   ALT   |   TODO  | LOWER |  SPACE  | |  TD0   |   MOD    |   \    | BSPC_DEL |
         */
 
             display-name = "Base";
             bindings = <
-                &kp GRAVE  &kp N1  &kp N2  &kp N3    &kp N4    &kp N5                       &kp N6    &kp N7  &kp N8     &kp N9   &kp N0    &kp MINUS
-                &kp TAB    &kp Q   &kp W   &kp E     &kp R     &kp T                        &kp Y     &kp U   &kp I      &kp O    &kp P     &kp EQUAL
-                &kp LCTRL  &kp A   &kp S   &kp D     &kp F     &kp G                        &kp H     &kp J   &kp K      &kp L    &kp SEMI  &kp SQT
-                &kp LSHFT  &kp Z   &kp X   &kp C     &kp V     &kp B   &trans     &kp RET   &kp N     &kp M   &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
-                                           &kp LALT  &trans    &mo 1   &kp SPACE  &td0      &kp LGUI  &trans  &bspc_del
+                &kp GRAVE  &kp N1  &kp N2  &kp N3    &kp N4    &kp N5                       &kp N6    &kp N7    &kp N8     &kp N9   &kp N0    &kp EQUAL
+                &kp TAB    &kp Q   &kp W   &kp E     &kp R     &kp T                        &kp Y     &kp U     &kp I      &kp O    &kp P     &kp MINUS
+                &kp LCTRL  &kp A   &kp S   &kp D     &kp F     &kp G                        &kp H     &kp J     &kp K      &kp L    &kp SEMI  &kp SQT
+                &kp LSHFT  &kp Z   &kp X   &kp C     &kp V     &kp B   &kp ESC    &kp RET   &kp N     &kp M     &kp COMMA  &kp DOT  &kp FSLH  &kp RSHFT
+                                           &kp LALT  &trans    &mo 1   &kp SPACE  &td0      &kp LGUI  &kp BSLH  &bspc_del
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        lower_layer {
+        layer_lower {
 
             /*
-                ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                |         |                     |                     |             |                 |            |                |   [   |    7    |    8   |    9    |     0    |    -   |
-                |   MUTE  |        VOL_DN       |        VOL_UP       |     PREV    |    PLAY/PAUSE   |    NEXT    |                |   ]   |    4    |    5   |    6    |   PSCRN  |        |
-                |         |        BRI_DN       |        BRI_UP       |             |       ESC       |            |                |   {   |    1    |    2   |    3    |     |    |        |
-                |         |                     |                     |     UNDO    |       REDO      |            |       | |      |   {   |    0    |    <   |    >    |     \    |        |
-                                                                      |             |                 |            |       | |      |  L4   |         |        |
+                -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                |    L4   |        |        |      |       |      |                          |       PREV       |     NEXT    |     /      |     *     |         |       PSCRN        |
+                |         |        |        |      |       |      |                          |                  |      7      |     8      |     9     |    -    |       BRI_UP       |
+                |         |        |        |      |       |      |                          |      VOL_UP      |      4      |     5      |     6     |    +    |       BRI_DN       |
+                |         |        |        |      |       |      |      | |  PLAY/PAUSE     |      VOL_DN      |      1      |     2      |     3     |         |                    |
+                                            |      |       |      |      | |     MUTE        |        0         |     UNDO    |    REDO    |
             */
 
             display-name = "Lower";
             bindings = <
-                &trans      &trans                &trans                &trans        &trans            &trans                        &kp LBKT  &kp N7  &kp N8  &kp N9  &kp N0     &kp MINUS
-                &kp K_MUTE  &kp K_VOLUME_DOWN     &kp K_VOLUME_UP       &kp K_PREV    &kp K_PLAY_PAUSE  &kp K_NEXT                    &kp RBKT  &kp N4  &kp N5  &kp N6  &kp PSCRN  &trans
-                &trans      &kp C_BRIGHTNESS_DEC  &kp C_BRIGHTNESS_INC  &trans        &kp ESC           &trans                        &kp LBRC  &kp N1  &kp N2  &kp N3  &kp PIPE   &trans
-                &trans      &trans                &trans                &kp LC(Z)     &kp LC(LS(Z))     &trans      &trans    &trans  &kp RBRC  &kp N0  &kp LT  &kp GT  &kp BSLH   &trans
-                                                                        &trans        &trans            &trans      &trans    &trans  &mo 4     &trans  &trans
+                &mo 4       &trans  &trans  &trans  &trans  &trans                             &kp K_PREV         &kp K_NEXT  &kp FSLH       &kp ASTRK  &trans     &kp PSCRN
+                &trans      &trans  &trans  &trans  &trans  &trans                             &trans             &kp N7      &kp N8         &kp N9     &kp MINUS  &kp C_BRIGHTNESS_INC
+                &trans      &trans  &trans  &trans  &trans  &trans                             &kp K_VOLUME_UP    &kp N4      &kp N5         &kp N6     &kp PLUS   &kp C_BRIGHTNESS_DEC
+                &trans      &trans  &trans  &trans  &trans  &trans  &trans   &kp K_PLAY_PAUSE  &kp K_VOLUME_DOWN  &kp N1      &kp N2         &kp N3     &trans     &trans
+                                            &trans  &trans  &trans  &trans   &kp K_MUTE        &kp N0             &kp LC(Z)   &kp LC(LS(Z)) 
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        raise_layer {
+        layer_raise {
 
             /*
                 Holding LCtrl with LC(LS(TAB)) and LC(TAB) in VSCode keeps the tab switcher open.
                 Reminder that we can also hold LCtrl with PAGE_UP and PAGE_DOWN to switch tabs.
 
-                -----------------------------------------------------------------------------------------------------------------------------------------------------------
-                |  F11  |   F1   |      F2      |     F3     |     F4     |   F5   |                    |      F6      |   F7     |    F8     |    F9    |   F10   |      |
-                |  F12  |        |    LS+TAB    |            |            |        |                    |     P_UP     |   HOME   |    ^      |    END   |         |      |
-                |       |        |   LS+LC+TAB  |    TAB     |   LC+TAB   |        |                    |    P_DOWN    |    <-    |    v      |    ->    |         |      |
-                |       |        |              |            |            |        |        |  |        |              |          |           |          |         |      |
-                                                             |            |   L4   |        |  |        |              |          |           |    DEL   |
+                --------------------------------------------------------------------------------------------------------------------------------------------------------
+                |      |   F1   |      F2      |     F3     |     F4     |   F5   |                  |     F6      |   F7     |    F8     |    F9    |   F10   |  F11  |
+                |      |        |    LS+TAB    |            |            |        |                  |    P_UP     |   HOME   |    ^      |    END   |         |  F12  |
+                |      |        |   LS+LC+TAB  |    TAB     |   LC+TAB   |        |                  |   P_DOWN    |    <-    |    v      |    ->    |         |       |
+                |      |        |              |            |            |        |       |  |       |             |          |           |          |         |       |
+                                               |            |            |        |       |  |       |             |          |   DEL     |
             */
 
             display-name = "Raise";
             bindings = <
-                &kp F11  &kp F1  &kp F2           &kp F3       &kp F4       &kp F5                     &kp F6         &kp F7     &kp F8      &kp F9     &kp F10   &trans
-                &kp F12  &trans  &trans           &kp LS(TAB)  &trans       &trans                     &kp PAGE_UP    &kp HOME   &kp UP      &kp END    &trans    &trans
-                &trans   &trans  &kp LC(LS(TAB))  &kp TAB      &kp LC(TAB)  &trans                     &kp PAGE_DOWN  &kp LEFT   &kp DOWN    &kp RIGHT  &trans    &trans
-                &trans   &trans  &trans           &trans       &trans       &trans   &trans    &trans  &trans         &trans     &trans      &trans     &trans    &trans
-                                                  &trans       &trans       &mo 4    &trans    &trans  &trans         &trans     &kp DELETE
+                &trans  &kp F1  &kp F2           &kp F3       &kp F4       &kp F5                     &kp F6         &kp F7     &kp F8      &kp F9     &kp F10  &kp F11
+                &trans  &trans  &trans           &kp LS(TAB)  &trans       &trans                     &kp PAGE_UP    &kp HOME   &kp UP      &kp END    &trans   &kp F12
+                &trans  &trans  &kp LC(LS(TAB))  &kp TAB      &kp LC(TAB)  &trans                     &kp PAGE_DOWN  &kp LEFT   &kp DOWN    &kp RIGHT  &trans   &trans
+                &trans  &trans  &trans           &trans       &trans       &trans   &trans    &trans  &trans         &trans     &trans      &trans     &trans   &trans
+                                                 &trans       &trans       &trans   &trans    &trans  &trans         &trans     &kp DELETE
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        unicode_layer {
+        layer_mouse {
             /*
-            -------------------------------------------------------------------------------------------------------------------------
-            |         |        |       |        |    ®   |   ™   |                 |       |       |       |       |      |  EM DASH|
-            |         |        |       |        |        |       |                 |M_SC_UP|M_SC_LT| M_UP  |M_SC_RT|      |         |
-            |         |        |   °   |        |        |       |                 |M_SC_DN| M_LT  | M_DN  | M_RT  |      |         |
-            |         |        |       |        |        |       |       | |       |       | M_LC  | M_MC  | M_RC  |   ¿  |         |
-                                       |        |        |       |       | |       |       |       |       |       |
+            ---------------------------------------------------------------------------------------------------------------------------------------------------------
+            |         |        |       |        |        |       |                 |               |               |               |                |       |       |
+            |         |        |       |        |        |       |                 |    M_SC_UP    |     M_SC_LT   |     M_UP      |     M_SC_RT    |       |       |
+            |         |        |       |        |        |       |                 |    M_SC_DN    |      M_LT     |     M_DN      |      M_RT      |       |       |
+            |         |        |       |        |        |       |       | |       |               |      M_LC     |     M_MC      |      M_RC      |       |       |
+                                       |        |        |       |       | |       |               |               |               |                |
             */
 
-            display-name = "Unicode";
+            display-name = "Mouse";
             bindings = <
-                &trans  &trans  &trans  &trans    &trans  &trans                     &trans          &trans          &trans          &trans           &trans  &em_dash
-                &trans  &trans  &trans  &trans    &regtm  &tm                        &msc SCRL_UP    &msc SCRL_LEFT  &mmv MOVE_UP    &msc SCRL_RIGHT  &trans  &trans
-                &trans  &trans  &trans  &degree   &trans  &trans                     &msc SCRL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans
-                &trans  &trans  &trans  &cpright  &trans  &trans   &trans    &trans  &trans          &mkp LCLK       &mkp MCLK       &mkp RCLK        &inv_q  &trans
+                &trans  &trans  &trans  &trans    &trans  &trans                     &trans          &trans          &trans          &trans           &trans  &trans
+                &trans  &trans  &trans  &trans    &trans  &trans                     &msc SCRL_UP    &msc SCRL_LEFT  &mmv MOVE_UP    &msc SCRL_RIGHT  &trans  &trans
+                &trans  &trans  &trans  &trans    &trans  &trans                     &msc SCRL_DOWN  &mmv MOVE_LEFT  &mmv MOVE_DOWN  &mmv MOVE_RIGHT  &trans  &trans
+                &trans  &trans  &trans  &trans    &trans  &trans   &trans    &trans  &trans          &mkp LCLK       &mkp MCLK       &mkp RCLK        &trans  &trans
                                         &trans    &trans  &trans   &trans    &trans  &trans          &trans          &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
-        double_layer {
+        layer_bluetooth {
 
             /*
-                ------------------------------------------------------------------------------------------------------------------------------------------------
-                |     |      BT1     |     BT2    |     BT3     |      BT4     |     BT5    |                   |       |       |       |       |       |      |
-                |     |              |            |             |              |            |                   |       |       |       |       |       |      |
-                |     |              |            |             |              |            |                   |       |       |       |       |       |      |
-                |     |              |            |             |              |            |  BTCLR  |  |      |       |       |       |       |       |      |
+                -------------------------------------------------------------------------------------------------------------------------------------------------
+                |     |      BT1     |     BT2    |     BT3     |      BT4     |     BT5    |                   |       |       |       |       |       |       |
+                |     |              |            |             |              |            |                   |       |       |       |       |       |       |
+                |     |              |            |             |              |            |                   |       |       |       |       |       |       |
+                |     |              |            |             |              |            |  BTCLR  |  |      |       |       |       |       |       |       |
                                                   |             |              |            |         |  |      |       |       |       |
           */
 
-            display-name = "Double";
+            display-name = "Bluetooth";
             bindings = <
                 &trans  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4                      &trans  &trans  &trans  &trans  &trans  &trans
                 &trans  &trans        &trans        &trans        &trans        &trans                            &trans  &trans  &trans  &trans  &trans  &trans
                 &trans  &trans        &trans        &trans        &trans        &trans                            &trans  &trans  &trans  &trans  &trans  &trans
                 &trans  &trans        &trans        &trans        &trans        &trans        &bt BT_CLR  &trans  &trans  &trans  &trans  &trans  &trans  &trans
                                                     &trans        &trans        &trans        &trans      &trans  &trans  &trans  &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+        };
+
+        layer_unicode {
+            /*
+            ----------------------------------------------------------------------------------------------------------------------------
+            |         |        |        |         |        |       |                 |        |      |        |      |       |         |
+            |         |        |        |         |    ®   |   ™   |                 |        |      |        |      |       | EM DASH |
+            |         |        |   °    |         |        |       |                 |        |      |        |      |       |         |
+            |         |        |        |    ©    |        |       |       | |       |        |      |        |      |   ¿   |         |
+                                        |         |        |       |       | |       |        |      |        |      |
+            */
+
+            display-name = "Unicode";
+            bindings = <
+                &trans  &trans  &trans    &trans    &trans  &trans                     &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans    &trans    &regtm  &tm                        &trans  &trans  &trans  &trans  &trans  &em_dash
+                &trans  &trans  &degree   &trans    &trans  &trans                     &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans    &cpright  &trans  &trans   &trans    &trans  &trans  &trans  &trans  &trans  &inv_q  &trans
+                                          &trans    &trans  &trans   &trans    &trans  &trans  &trans          &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;

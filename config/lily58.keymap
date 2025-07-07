@@ -188,8 +188,8 @@ https://zmk.dev/docs/behaviors/mouse-emulation
 
             /*
                 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                |    L4   |        |        |      |       |      |                          |       PREV       |     NEXT    |     /      |     *     |         |       PSCRN        |
-                |         |        |        |      |       |      |                          |                  |      7      |     8      |     9     |    -    |       BRI_UP       |
+                |    L4   |        |        |      |       |      |                          |      PREV        |      /      |     *      |     [     |    ]    |       NEXT         |
+                |         |        |        |      |       |      |                          |      PSCRN       |      7      |     8      |     9     |    -    |       BRI_UP       |
                 |         |        |        |      |       |      |                          |      VOL_UP      |      4      |     5      |     6     |    +    |       BRI_DN       |
                 |         |        |        |      |       |      |      | |  PLAY/PAUSE     |      VOL_DN      |      1      |     2      |     3     |         |                    |
                                             |      |       |      |      | |     MUTE        |        0         |     UNDO    |    REDO    |
@@ -197,8 +197,8 @@ https://zmk.dev/docs/behaviors/mouse-emulation
 
             display-name = "Lower";
             bindings = <
-                &mo 4       &trans  &trans  &trans  &trans  &trans                             &kp K_PREV         &kp K_NEXT  &kp FSLH       &kp ASTRK  &trans     &kp PSCRN
-                &trans      &trans  &trans  &trans  &trans  &trans                             &trans             &kp N7      &kp N8         &kp N9     &kp MINUS  &kp C_BRIGHTNESS_INC
+                &mo 4       &trans  &trans  &trans  &trans  &trans                             &kp K_PREV         &kp FSLH    &kp ASTRK      &kp LBKT   &kp RBKT   &kp K_NEXT
+                &trans      &trans  &trans  &trans  &trans  &trans                             &kp PSCRN          &kp N7      &kp N8         &kp N9     &kp MINUS  &kp C_BRIGHTNESS_INC
                 &trans      &trans  &trans  &trans  &trans  &trans                             &kp K_VOLUME_UP    &kp N4      &kp N5         &kp N6     &kp PLUS   &kp C_BRIGHTNESS_DEC
                 &trans      &trans  &trans  &trans  &trans  &trans  &trans   &kp K_PLAY_PAUSE  &kp K_VOLUME_DOWN  &kp N1      &kp N2         &kp N3     &trans     &trans
                                             &trans  &trans  &trans  &trans   &kp K_MUTE        &kp N0             &kp LC(Z)   &kp LC(LS(Z)) 

@@ -189,9 +189,9 @@ https://zmk.dev/docs/behaviors/mouse-emulation
             /*
                 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 |    L4   |        |        |      |       |      |                          |      PREV        |             |            |     [     |    ]    |       NEXT         |
-                |         |        |        |      |       |      |                          |      PSCRN       |      [      |      ]     |     (     |    )    |       EM DASH      |
-                |         |        |        |      |       |      |                          |      VOL_UP      |      {      |      }     |     |     |    \    |       BRI_UP       |
-                |         |        |        |      |       |      |      | |  PLAY/PAUSE     |      VOL_DN      |             |            |           |         |       BRI_DN       |
+                |         |        |        |      |       |      |                          |      PSCRN       |      [      |      ]     |           |         |       EM DASH      |
+                |         |        |        |      |       |      |                          |      VOL_UP      |      (      |      )     |     |     |    \    |       BRI_UP       |
+                |         |        |        |      |       |      |      | |  PLAY/PAUSE     |      VOL_DN      |      {      |      }     |           |         |       BRI_DN       |
                                             |      |       |      |      | |     MUTE        |                  |     UNDO    |    REDO    |
             */
 
@@ -199,8 +199,8 @@ https://zmk.dev/docs/behaviors/mouse-emulation
             bindings = <
                 &mo 4       &trans  &trans  &trans  &trans  &trans                             &kp K_PREV         &trans      &trans         &kp LBKT   &kp RBKT   &kp K_NEXT
                 &trans      &trans  &trans  &trans  &trans  &trans                             &kp PSCRN          &kp LBKT    &kp RBKT       &kp LPAR   &kp RPAR   &em_dash
-                &trans      &trans  &trans  &trans  &trans  &trans                             &kp K_VOLUME_UP    &kp LBRC    &kp RBRC       &kp PIPE   &kp BSLH   &kp C_BRIGHTNESS_INC
-                &trans      &trans  &trans  &trans  &trans  &trans  &trans   &kp K_PLAY_PAUSE  &kp K_VOLUME_DOWN  &trans      &trans         &trans     &trans     &kp C_BRIGHTNESS_DEC
+                &trans      &trans  &trans  &trans  &trans  &trans                             &kp K_VOLUME_UP    &kp LPAR    &kp RPAR       &kp PIPE   &kp BSLH   &kp C_BRIGHTNESS_INC
+                &trans      &trans  &trans  &trans  &trans  &trans  &trans   &kp K_PLAY_PAUSE  &kp K_VOLUME_DOWN  &kp LBRC    &kp RBRC       &trans     &trans     &kp C_BRIGHTNESS_DEC
                                             &trans  &trans  &trans  &trans   &kp K_MUTE        &trans             &kp LC(Z)   &kp LC(LS(Z)) 
             >;
 

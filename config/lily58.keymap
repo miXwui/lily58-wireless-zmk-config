@@ -188,20 +188,20 @@ https://zmk.dev/docs/behaviors/mouse-emulation
 
             /*
                 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                |    L4   |        |        |      |       |      |                          |      PREV        |      /      |     *      |     [     |    ]    |       NEXT         |
-                |         |        |        |      |       |      |                          |      PSCRN       |      7      |     8      |     9     |    -    |       EM DASH      |
-                |         |        |        |      |       |      |                          |      VOL_UP      |      4      |     5      |     6     |    +    |       BRI_UP       |
-                |         |        |        |      |       |      |      | |  PLAY/PAUSE     |      VOL_DN      |      1      |     2      |     3     |    \    |       BRI_DN       |
-                                            |      |       |      |      | |     MUTE        |        0         |     UNDO    |    REDO    |
+                |    L4   |        |        |      |       |      |                          |      PREV        |             |            |     [     |    ]    |       NEXT         |
+                |         |        |        |      |       |      |                          |      PSCRN       |      (      |      )     |           |         |       EM DASH      |
+                |         |        |        |      |       |      |                          |      VOL_UP      |      [      |      ]     |     \     |    |    |       BRI_UP       |
+                |         |        |        |      |       |      |      | |  PLAY/PAUSE     |      VOL_DN      |      {      |      }     |     <     |    >    |       BRI_DN       |
+                                            |      |       |      |      | |     MUTE        |                  |     UNDO    |    REDO    |
             */
 
             display-name = "Lower";
             bindings = <
-                &mo 4       &trans  &trans  &trans  &trans  &trans                             &kp K_PREV         &kp FSLH    &kp ASTRK      &kp LBKT   &kp RBKT   &kp K_NEXT
-                &trans      &trans  &trans  &trans  &trans  &trans                             &kp PSCRN          &kp N7      &kp N8         &kp N9     &kp MINUS  &em_dash
-                &trans      &trans  &trans  &trans  &trans  &trans                             &kp K_VOLUME_UP    &kp N4      &kp N5         &kp N6     &kp PLUS   &kp C_BRIGHTNESS_INC
-                &trans      &trans  &trans  &trans  &trans  &trans  &trans   &kp K_PLAY_PAUSE  &kp K_VOLUME_DOWN  &kp N1      &kp N2         &kp N3     &kp BSLH   &kp C_BRIGHTNESS_DEC
-                                            &trans  &trans  &trans  &trans   &kp K_MUTE        &kp N0             &kp LC(Z)   &kp LC(LS(Z)) 
+                &mo 4       &trans  &trans  &trans  &trans  &trans                             &kp K_PREV         &trans      &trans         &kp LBKT   &kp RBKT   &kp K_NEXT
+                &trans      &trans  &trans  &trans  &trans  &trans                             &kp PSCRN          &kp LPAR    &kp RPAR       &trans     &trans     &em_dash
+                &trans      &trans  &trans  &trans  &trans  &trans                             &kp K_VOLUME_UP    &kp LBKT    &kp RBKT       &kp BSLH   &kp PIPE   &kp C_BRIGHTNESS_INC
+                &trans      &trans  &trans  &trans  &trans  &trans  &trans   &kp K_PLAY_PAUSE  &kp K_VOLUME_DOWN  &kp LBRC    &kp RBRC       &kp LT     &kp GT     &kp C_BRIGHTNESS_DEC
+                                            &trans  &trans  &trans  &trans   &kp K_MUTE        &trans             &kp LC(Z)   &kp LC(LS(Z)) 
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;

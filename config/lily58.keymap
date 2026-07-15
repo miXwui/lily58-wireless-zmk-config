@@ -14,103 +14,30 @@
 https://zmk.dev/docs/behaviors/mouse-emulation
 */
 #include <dt-bindings/zmk/pointing.h>
+#include <behaviors/unicode.dtsi>
+
+/*
+ * Unicode input via urob/zmk-unicode module.
+ * Tracking: https://github.com/zmkfirmware/zmk/issues/232
+ * See: https://github.com/urob/zmk-unicode
+ */
+&uc {
+  default-mode = <UC_MODE_LINUX>;
+};
+
+/* Unicode character aliases */
+#define REG     &uc 0xAE 0    /* ® registered trademark */
+#define COPYR   &uc 0xA9 0    /* © copyright */
+#define TRAD    &uc 0x2122 0  /* ™ trademark */
+#define DEG     &uc 0xB0 0    /* ° degree */
+#define INVQ    &uc 0xBF 0    /* ¿ inverted question mark */
+#define INVE    &uc 0xA1 0    /* ¡ inverted exclamation mark */
+#define N_TLD   &uc 0xF1 0    /* ñ n with tilde */
+#define E_ACT   &uc 0xE9 0    /* é e with acute */
+#define BULLET  &uc 0x2022 0  /* • bullet */
+#define ELLIPSIS &uc 0x2026 0 /* … ellipsis */
 
 / {
-    macros {
-        /*
-        https://zmk.dev/docs/behaviors/macros
- 
-        Type unicode characters using macros until https://github.com/zmkfirmware/zmk/issues/232 is merged.
-        See:
-        * https://icyphox.sh/blog/zmk-unicode/
-        * https://zmk.dev/docs/behaviors/macros#unicode-sequences
-        */
-
-        em_dash: em_dash {
-            label = "UC_EM_DASH";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            tap-ms = <0>;
-            wait-ms = <0>;
-            bindings
-                = <&macro_press &kp LCTRL &kp LSHFT>
-                , <&macro_tap &kp U>
-                , <&macro_release &kp LCTRL &kp LSHFT>
-                , <&macro_tap &kp N2 &kp N0 &kp N1 &kp N4 &kp SPC>
-                ;
-        };
-
-        degree: degree {
-            label = "UC_DEGREE";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            tap-ms = <0>;
-            wait-ms = <0>;
-            bindings
-                = <&macro_press &kp LCTRL &kp LSHFT>
-                , <&macro_tap &kp U>
-                , <&macro_release &kp LCTRL &kp LSHFT>
-                , <&macro_tap &kp N0 &kp N0 &kp B &kp N0 &kp SPC>
-                ;
-        };
-
-        cpright: cpright {
-            label = "UC_COPYRIGHT";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            tap-ms = <0>;
-            wait-ms = <0>;
-            bindings
-                = <&macro_press &kp LCTRL &kp LSHFT>
-                , <&macro_tap &kp U>
-                , <&macro_release &kp LCTRL &kp LSHFT>
-                , <&macro_tap &kp N0 &kp N0 &kp A &kp N9 &kp SPC>
-                ;
-        };
-
-        regtm: regtm {
-            label = "UC_REGISTERED_TRADEMARK";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            tap-ms = <0>;
-            wait-ms = <0>;
-            bindings
-                = <&macro_press &kp LCTRL &kp LSHFT>
-                , <&macro_tap &kp U>
-                , <&macro_release &kp LCTRL &kp LSHFT>
-                , <&macro_tap &kp N0 &kp N0 &kp A &kp E &kp SPC>
-                ;
-        }; 
-
-        tm: tm {
-            label = "UC_TRADEMARK";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            tap-ms = <0>;
-            wait-ms = <0>;
-            bindings
-                = <&macro_press &kp LCTRL &kp LSHFT>
-                , <&macro_tap &kp U>
-                , <&macro_release &kp LCTRL &kp LSHFT>
-                , <&macro_tap &kp N2 &kp N1 &kp N2 &kp N2 &kp SPC>
-                ;
-        };
-
-        inv_q: inv_q {
-            label = "UC_INVERTED_Q";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            tap-ms = <0>;
-            wait-ms = <0>;
-            bindings
-                = <&macro_press &kp LCTRL &kp LSHFT>
-                , <&macro_tap &kp U>
-                , <&macro_release &kp LCTRL &kp LSHFT>
-                , <&macro_tap &kp N0 &kp N0 &kp B &kp F &kp SPC>
-                ;
-        };
-    };
-
     behaviors {
         /*
         https://zmk.dev/docs/behaviors/mod-morph
@@ -122,6 +49,27 @@ https://zmk.dev/docs/behaviors/mouse-emulation
             bindings = <&kp BACKSPACE>, <&kp DELETE>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
             keep-mods = <(MOD_RSFT)>;
+        };
+
+        en_em_dash: en_em_dash {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc 0x2013 0>, <&uc 0x2014 0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        lq_rq: lq_rq {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc 0x2018 0>, <&uc 0x2019 0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        ldq_rdq: ldq_rdq {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&uc 0x201C 0>, <&uc 0x201D 0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
         /*
@@ -189,7 +137,7 @@ https://zmk.dev/docs/behaviors/mouse-emulation
             /*
                 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
                 |    L4   |        |        |      |       |      |                          |      PREV        |             |            |     [     |    ]    |       NEXT         |
-                |         |        |        |      |       |      |                          |      PSCRN       |      [      |      ]     |           |         |       EM DASH      |
+                |         |        |        |      |       |      |                          |      PSCRN       |      [      |      ]     |           |         |                    |
                 |         |        |        |      |       |      |                          |      VOL_UP      |      (      |      )     |     |     |    \    |       BRI_UP       |
                 |         |        |        |      |       |      |      | |  PLAY/PAUSE     |      VOL_DN      |      {      |      }     |           |         |       BRI_DN       |
                                             |      |       |      |      | |     MUTE        |                  |     UNDO    |    REDO    |
@@ -198,7 +146,7 @@ https://zmk.dev/docs/behaviors/mouse-emulation
             display-name = "Lower";
             bindings = <
                 &mo 4       &trans  &trans  &trans  &trans  &trans                             &kp K_PREV         &trans      &trans         &kp LBKT   &kp RBKT   &kp K_NEXT
-                &trans      &trans  &trans  &trans  &trans  &trans                             &kp PSCRN          &kp LBKT    &kp RBKT       &kp LPAR   &kp RPAR   &em_dash
+                &trans      &trans  &trans  &trans  &trans  &trans                             &kp PSCRN          &kp LBKT    &kp RBKT       &kp LPAR   &kp RPAR   &trans
                 &trans      &trans  &trans  &trans  &trans  &trans                             &kp K_VOLUME_UP    &kp LPAR    &kp RPAR       &kp PIPE   &kp BSLH   &kp C_BRIGHTNESS_INC
                 &trans      &trans  &trans  &trans  &trans  &trans  &trans   &kp K_PLAY_PAUSE  &kp K_VOLUME_DOWN  &kp LBRC    &kp RBRC       &trans     &trans     &kp C_BRIGHTNESS_DEC
                                             &trans  &trans  &trans  &trans   &kp K_MUTE        &trans             &kp LC(Z)   &kp LC(LS(Z)) 
@@ -281,19 +229,20 @@ https://zmk.dev/docs/behaviors/mouse-emulation
         layer_unicode {
             /*
             ----------------------------------------------------------------------------------------------------------------------------
-            |         |        |        |         |        |       |                 |        |      |        |      |       |         |
-            |         |        |        |         |    ®   |   ™   |                 |        |      |        |      |       | EM DASH |
-            |         |        |   °    |         |        |       |                 |        |      |        |      |       |         |
-            |         |        |        |    ©    |        |       |       | |       |        |      |        |      |   ¿   |         |
-                                        |         |        |       |       | |       |        |      |        |      |
+            |         |    ¡   |        |         |        |        |                 |        |      |        |      |       |         |
+            |         |        |   W    |    é    |    ®   |    ™   |                 |        |      |        |      |       |  – / —  |
+            |         |        |        |    °    |        |        |                 |        |      |        |   L  |   "   |         |
+            |         |        |        |     ©   |    •   |        |       | |       |   ñ    |  M   |        |   …  |   ¿   |         |
+                               |        |         |        |        |       | |       |        |      |        |
+            // M = Mac, W = Windows, L = Linux
             */
 
             display-name = "Unicode";
             bindings = <
-                &trans  &trans  &trans    &trans    &trans  &trans                     &trans  &trans  &trans  &trans  &trans  &trans
-                &trans  &trans  &trans    &trans    &regtm  &tm                        &trans  &trans  &trans  &trans  &trans  &em_dash
-                &trans  &trans  &degree   &trans    &trans  &trans                     &trans  &trans  &trans  &trans  &trans  &trans
-                &trans  &trans  &trans    &cpright  &trans  &trans   &trans    &trans  &trans  &trans  &trans  &trans  &inv_q  &trans
+                &trans  INVE    &trans    &trans    &trans  &trans                     &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &uc UC_SET_WIN_COMPOSE  E_ACT     REG     TRAD                       &trans  &trans  &trans  &trans  &trans  &en_em_dash
+                &trans  &trans  &trans    DEG       &trans  &trans                     &trans  &trans  &trans  &uc UC_SET_LINUX  &lq_rq  &ldq_rdq
+                &trans  &trans  &trans    COPYR     BULLET  &trans   &trans    &trans  N_TLD   &uc UC_SET_MACOS  &trans  ELLIPSIS  INVQ  &trans
                                           &trans    &trans  &trans   &trans    &trans  &trans  &trans          &trans
             >;
 

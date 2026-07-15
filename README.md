@@ -6,6 +6,29 @@ This is my configuration and notes for my Lily58 bought from https://typeractive
 
 ## Setup
 
+### With devenv (recommended)
+
+Install Nix and devenv:
+
+```sh
+sh <(curl -L https://devenv.sh)
+```
+
+Enter the dev environment and initialize the workspace:
+
+```sh
+devenv shell
+west-setup
+```
+
+Build:
+
+```sh
+build-both
+```
+
+Available commands: `west-setup`, `build-left`, `build-right`, `build-both`, `clean-build`
+
 ### Build locally
 
 Install ZMK toolchain:
@@ -16,15 +39,15 @@ Build the config from the ZMK folder (make sure to clean the `build/` folder bef
 Left side:
 
 ```sh
-west build -s app/ -d build/ -b "nice_nano//zmk"  -- -DZMK_CONFIG=/home/mwu/Documents/git-repos/lily58-wireless-zmk-config/config/ -DSHIELD="lily58_left"
-cp build/zephyr/zmk.uf2 ../lily58-wireless-zmk-config/build/lily58_left-nice_nano-zmk.uf2
+west build -s app/ -d build/ -b "nice_nano//zmk" -- -DZMK_CONFIG=$(pwd)/config -DSHIELD="lily58_left"
+cp build/zephyr/zmk.uf2 build/lily58_left-nice_nano-zmk.uf2
 ```
 
 Right side:
 
 ```sh
-west build -s app/ -d build/ -b "nice_nano//zmk"  -- -DZMK_CONFIG=/home/mwu/Documents/git-repos/lily58-wireless-zmk-config/config/ -DSHIELD="lily58_right"
-cp build/zephyr/zmk.uf2 ../lily58-wireless-zmk-config/build/lily58_right-nice_nano-zmk.uf2
+west build -s app/ -d build/ -b "nice_nano//zmk" -- -DZMK_CONFIG=$(pwd)/config -DSHIELD="lily58_right"
+cp build/zephyr/zmk.uf2 build/lily58_right-nice_nano-zmk.uf2
 ```
 
 ### Update keyboard sides

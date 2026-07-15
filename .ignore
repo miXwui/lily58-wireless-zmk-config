@@ -1,0 +1,8 @@
+.devenv/
+build/
+zephyr/
+zmk/
+modules/
+zmk-unicode/
+.west/
+optional/

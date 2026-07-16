@@ -40,8 +40,19 @@
 - Trimmed west manifest: only cmsis, hal_nordic, mbedtls, tinycrypt + lvgl (from zmk import)
 - `Zephyr_DIR` export needed in devenv for cmake to find Zephyr
 
+### Bluetooth troubleshooting
+
+- `CONFIG_BT_CTLR_PHY_2M=n`: disables 2Mbps PHY for wider adapter compatibility (our fix)
+- Source: https://github.com/zmkfirmware/zmk/issues/1487
+- v0.3.0 enforces stricter Bluetooth protocols; disabling 2M PHY helps older devices: https://github.com/zmkfirmware/zmk/issues/3158#issuecomment-3688452642
+- Nice!nano power-on: 2 quick blinks (Adafruit bootloader, before ZMK starts)
+- LED module polls BLE connection every 200ms for up to 5s on peripheral boot
+- Vendored zmk-poor-mans-led-indicator locally to patch boot delay and avoid west-update dependency
+
 ## Dev
 
 - `devenv shell` to enter environment, then `build-both` for firmware
 - `west-setup` to init workspace (run once, or when `west.yml` changes)
 - `west update --fetch-opt=--filter=tree:0` for faster clones
+- `build-both-debug` for USB logging (requires zephyr_udc0 in overlay)
+- `sudo tio /dev/ttyACM0` to view serial logs

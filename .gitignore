@@ -1,8 +1,12 @@
 .devenv/
-build/
 zephyr/
 zmk/
 modules/
 zmk-unicode/
 .west/
 optional/
+
+# Build
+build/*
+!build/lily58_left-nice_nano-zmk.uf2
+!build/lily58_right-nice_nano-zmk.uf2

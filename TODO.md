@@ -58,3 +58,8 @@ of time.~~ Well, I moved the right arrow nav modifier to the farthest left
 
 - [ ] Set up `devenv` with build scripts
 - [ ] Add `.gitignore` and `.ignore` for `.devenv/` and `build/`
+
+## Display features (when OLED installed)
+
+- [ ] Show active BT profile/device name on screen
+- [ ] Show current Unicode OS mode (Linux/Mac/Windows) on screen

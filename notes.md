@@ -30,13 +30,18 @@
 - ZMK native tracking: https://github.com/zmkfirmware/zmk/issues/232
 - Use `#define` aliases in keymap for readable unicode references
 - Mod-morph with `&uc` for shifted variants (en/em dash, smart quotes)
+- UC_SET_LINUX / UC_SET_MACOS / UC_SET_WIN_COMPOSE on L/M/W keys
+- Ghostty: unicode input requires IBus/Fcitx running (GTK input method)
 
 ## ZMK
 
 - Zephyr 4.1 HWMv2: board names changed from `nice_nano_v2` to `nice_nano//zmk`
 - Deep sleep regression #3207 fixed via `v4.1.0+zmk-fixes` branch
+- Trimmed west manifest: only cmsis, hal_nordic, mbedtls, tinycrypt + lvgl (from zmk import)
+- `Zephyr_DIR` export needed in devenv for cmake to find Zephyr
 
 ## Dev
 
 - `devenv shell` to enter environment, then `build-both` for firmware
-- `west update` only needed when `west.yml` changes
+- `west-setup` to init workspace (run once, or when `west.yml` changes)
+- `west update --fetch-opt=--filter=tree:0` for faster clones

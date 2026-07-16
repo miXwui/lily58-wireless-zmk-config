@@ -41,23 +41,23 @@ of time.~~ Well, I moved the right arrow nav modifier to the farthest left
 
 ## Unicode input
 
-- [ ] Replace macro-based Unicode with `urob/zmk-unicode` module
-- [ ] Add `#define` aliases for all Unicode characters
-- [ ] Add mod-morphs: en/em dash, smart single/double quotes
-- [ ] Remove em dash from Lower layer (position 23)
-- [ ] Fix `DEG` position (was on S, should be on D)
-- [ ] Add é, ñ, ¡, •, … to Unicode layer
+- [x] Replace macro-based Unicode with `urob/zmk-unicode` module
+- [x] Add `#define` aliases for all Unicode characters
+- [x] Add mod-morphs: en/em dash, smart single/double quotes
+- [x] Remove em dash from Lower layer (position 23)
+- [x] Fix `DEG` position (was on S, should be on D)
+- [x] Add é, ñ, ¡, •, … to Unicode layer
 
 ## ZMK/firmware
 
-- [ ] Update ZMK to latest main with Zephyr 4.1/HWMv2
-- [ ] Update board names: `nice_nano_v2` → `nice_nano//zmk`
-- [ ] Change double shift to caps lock with accidental-trigger guard
+- [x] Update ZMK to latest main with Zephyr 4.1/HWMv2
+- [x] Update board names: `nice_nano_v2` → `nice_nano//zmk`
+- [x] Change double shift to caps lock with accidental-trigger guard
 
 ## Dev environment
 
-- [ ] Set up `devenv` with build scripts
-- [ ] Add `.gitignore` and `.ignore` for `.devenv/` and `build/`
+- [x] Set up `devenv` with build scripts
+- [x] Add `.gitignore` and `.ignore` for `.devenv/` and `build/`
 
 ## Display features (when OLED installed)
 

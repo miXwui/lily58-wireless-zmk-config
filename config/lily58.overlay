@@ -1,0 +1,9 @@
+/ {
+    aliases {
+        indicator-led = &blue_led;
+    };
+};
+
+zephyr_udc0: &usbd {
+    status = "okay";
+};

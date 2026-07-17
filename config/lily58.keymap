@@ -101,11 +101,11 @@ https://zmk.dev/docs/behaviors/mouse-emulation
         compatible = "zmk,combos";
 
         combo_capsword {
-                timeout-ms = <100>;
-                key-positions = <36 49>;
+                timeout-ms = <250>;
+                key-positions = <36 49 54>;  // LShift, RShift, right thumb (TD0)
                 bindings = <&kp CAPSLOCK>;
                 layers = <0>;
-                require-prior-idle-ms = <150>; // prevents accidental trigger during typing
+                require-prior-idle-ms = <0>;
             };
 
     };

@@ -11,6 +11,9 @@
     libusb1
     pkg-config
     zlib
+
+    # Debugging
+    tio
   ];
 
   env = {
@@ -22,12 +25,15 @@
     export ZEPHYR_BASE="$PWD/zephyr"
     export Zephyr_DIR="$PWD/zephyr/share/zephyr-package/cmake"
     echo "ZMK dev environment"
-    echo "  Commands: west-setup, build-left, build-right, build-both, clean-build"
+    echo "  Commands: west-setup, west-update, build-left, build-right, build-both, clean-build"
+    echo "  Debug:    build-left-debug, build-right-debug, build-both-debug (USB logging)"
+    echo "  Serial:   sudo tio /dev/ttyACM0 (USB logs, exit with Ctrl+T + Q)"
+    echo "  Vendored modules: vendor/zmk-poor-mans-led-indicator (source: https://github.com/BlueDrink9/zmk-poor-mans-led-indicator)"
   '';
 
   scripts.build-left = {
     exec = ''
-      west build -s zmk/app/ -d build/left -b "nice_nano//zmk" -- -DZMK_CONFIG=$(pwd)/config -DSHIELD="lily58_left"
+      west build -s zmk/app/ -d build/left -b "nice_nano//zmk" -- -DZMK_CONFIG=$(pwd)/config -DZMK_EXTRA_MODULES=$(pwd)/vendor/zmk-poor-mans-led-indicator -DSHIELD="lily58_left"
       cp build/left/zephyr/zmk.uf2 build/lily58_left-nice_nano-zmk.uf2
       echo "Copied to build/lily58_left-nice_nano-zmk.uf2"
     '';
@@ -36,7 +42,7 @@
 
   scripts.build-right = {
     exec = ''
-      west build -s zmk/app/ -d build/right -b "nice_nano//zmk" -- -DZMK_CONFIG=$(pwd)/config -DSHIELD="lily58_right"
+      west build -s zmk/app/ -d build/right -b "nice_nano//zmk" -- -DZMK_CONFIG=$(pwd)/config -DZMK_EXTRA_MODULES=$(pwd)/vendor/zmk-poor-mans-led-indicator -DSHIELD="lily58_right"
       cp build/right/zephyr/zmk.uf2 build/lily58_right-nice_nano-zmk.uf2
       echo "Copied to build/lily58_right-nice_nano-zmk.uf2"
     '';
@@ -54,11 +60,47 @@
     description = "Build both sides";
   };
 
+  scripts.build-left-debug = {
+    exec = ''
+      west build -s zmk/app/ -d build/left -b "nice_nano//zmk" -S zmk-usb-logging -- -DZMK_CONFIG=$(pwd)/config -DZMK_EXTRA_MODULES=$(pwd)/vendor/zmk-poor-mans-led-indicator -DSHIELD="lily58_left"
+      cp build/left/zephyr/zmk.uf2 build/lily58_left-nice_nano-zmk.uf2
+      echo "Copied to build/lily58_left-nice_nano-zmk.uf2"
+    '';
+    description = "Build left side firmware with USB logging";
+  };
+
+  scripts.build-right-debug = {
+    exec = ''
+      west build -s zmk/app/ -d build/right -b "nice_nano//zmk" -S zmk-usb-logging -- -DZMK_CONFIG=$(pwd)/config -DZMK_EXTRA_MODULES=$(pwd)/vendor/zmk-poor-mans-led-indicator -DSHIELD="lily58_right"
+      cp build/right/zephyr/zmk.uf2 build/lily58_right-nice_nano-zmk.uf2
+      echo "Copied to build/lily58_right-nice_nano-zmk.uf2"
+    '';
+    description = "Build right side firmware with USB logging";
+  };
+
+  scripts.build-both-debug = {
+    exec = ''
+      build-left-debug && build-right-debug &&
+      echo "
+      Output (debug):
+      build/lily58_left-nice_nano-zmk.uf2
+      build/lily58_right-nice_nano-zmk.uf2"
+    '';
+    description = "Build both sides with USB logging";
+  };
+
   scripts.clean-build = {
     exec = ''
       rm -rf build/left build/right
     '';
     description = "Clean build directories";
+  };
+
+  scripts.west-update = {
+    exec = ''
+      west update --fetch-opt=--filter=tree:0
+    '';
+    description = "Sync modules to west.yml";
   };
 
   scripts.west-setup = {

@@ -21,13 +21,15 @@ devenv shell
 west-setup
 ```
 
+Run `west-update` when you add or remove a module from `config/west.yml`.
+
 Build:
 
 ```sh
 build-both
 ```
 
-Available commands: `west-setup`, `build-left`, `build-right`, `build-both`, `clean-build`
+Available commands: `west-setup`, `west-update`, `build-left`, `build-right`, `build-both`, `clean-build`
 
 ### Build locally
 
@@ -39,15 +41,15 @@ Build the config from the ZMK folder (make sure to clean the `build/` folder bef
 Left side:
 
 ```sh
-west build -s app/ -d build/ -b "nice_nano//zmk" -- -DZMK_CONFIG=$(pwd)/config -DSHIELD="lily58_left"
-cp build/zephyr/zmk.uf2 build/lily58_left-nice_nano-zmk.uf2
+west build -s zmk/app/ -d build/left -b "nice_nano//zmk" -- -DZMK_CONFIG=$(pwd)/config -DZMK_EXTRA_MODULES=$(pwd)/vendor/zmk-poor-mans-led-indicator -DSHIELD="lily58_left"
+cp build/left/zephyr/zmk.uf2 build/lily58_left-nice_nano-zmk.uf2
 ```
 
 Right side:
 
 ```sh
-west build -s app/ -d build/ -b "nice_nano//zmk" -- -DZMK_CONFIG=$(pwd)/config -DSHIELD="lily58_right"
-cp build/zephyr/zmk.uf2 build/lily58_right-nice_nano-zmk.uf2
+west build -s zmk/app/ -d build/right -b "nice_nano//zmk" -- -DZMK_CONFIG=$(pwd)/config -DZMK_EXTRA_MODULES=$(pwd)/vendor/zmk-poor-mans-led-indicator -DSHIELD="lily58_right"
+cp build/right/zephyr/zmk.uf2 build/lily58_right-nice_nano-zmk.uf2
 ```
 
 ### Update keyboard sides
@@ -56,6 +58,10 @@ cp build/zephyr/zmk.uf2 build/lily58_right-nice_nano-zmk.uf2
 2. It will then update/restart and disconnect from USB with an "Error while copying" (false error).
 
 Note: sometimes Nautilus won't allow writing apparently after reconnecting or connecting the other side after, I think because it wasn't properly ejected. So just eject and reconnect, and writing will work again.
+
+## LED status indicator
+
+See [`config/lily58.conf`](config/lily58.conf) for detailed documentation on LED blink patterns, boot sequences, and power estimates.
 
 ## Get peripheral battery level
 
